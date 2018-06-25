@@ -5,31 +5,24 @@
  */
 package modelo;
 
-import modelo.BD;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.swing.JOptionPane;
-
 /**
  *
- * @author Juan
+ * @author User
  */
 public class Usuario {
-    Connection cn;
-    public String nom_usu,password,cargo;
+    private String nom_usu,password,cargo;
 
+    public Usuario(String nom_usu, String password, String cargo){
+        this.nom_usu=nom_usu;
+        this.password=password;
+        this.cargo=cargo;
+    }
     public String getCargo() {
         return cargo;
     }
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
-    }
-    
-    public Usuario(){
-        BD con = new BD();
-        cn= con.conexion();
     }
 
     public String getNom_usu() {
@@ -48,23 +41,5 @@ public class Usuario {
         this.password = password;
     }
     
-    public void ingreso(){
-        try{
-            String id;
-            
-         PreparedStatement cmd = cn.prepareStatement("select Nom_usu,Password,cargo from usuario where Nom_usu=?");
-         cmd.setString(1,getNom_usu());
-         ResultSet rs = cmd.executeQuery() ;
-         
-         if(rs.next()){
-             id = rs.getString(1);
-             this.setPassword(rs.getString(2));
-             this.setCargo(rs.getString(3));
-         }
-        }
-        catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-        
-    }
+    
 }

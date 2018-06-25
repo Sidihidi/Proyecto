@@ -18,24 +18,29 @@ import javax.swing.JOptionPane;
  * @author Juan
  */
 public class BD {
-    Connection conect;
-    Statement stSentenciasSQL;
-    ResultSet rsDatosResultado;
+    private Connection con;
+    
+    public BD(){   
+    }
     public Connection conexion(){
         try{
             Class.forName("oracle.jdbc.OracleDriver");
-            conect=DriverManager.getConnection("jdbc:oracle:thin:PROYECTO/123456@localhost:1521:XE");
-            stSentenciasSQL = conect.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            con=DriverManager.getConnection("jdbc:oracle:thin:PROYECTO/123456@localhost:1521:XE");   
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"ERROR DE CONEXION"+e);
         }
         
-        return conect;
+        return con;
         
     }
-    public void ejecutar(String sql) throws SQLException {
-        stSentenciasSQL.execute(sql);
+    public void closeConnection(Connection con) {
+        try {
+            con.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Excepción de SQL", JOptionPane.ERROR_MESSAGE);
+        }
     }
+   
     
 }
     
