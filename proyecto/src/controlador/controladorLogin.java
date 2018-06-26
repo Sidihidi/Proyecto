@@ -19,6 +19,8 @@ import modelo.Usuario;
 import vista.MenuAdministrador;
 import vista.consultas;
 import Inicio.InicioAplicaccion;
+import java.util.Locale;
+import java.util.ResourceBundle;
 /**
  *
  * @author User
@@ -26,15 +28,25 @@ import Inicio.InicioAplicaccion;
 public class controladorLogin implements ActionListener, WindowListener {
     private UsuarioDAO modelo;
     private Pantalla_inicio vista;
+    private Locale loc;
+    private ResourceBundle rb;
     
     public controladorLogin(UsuarioDAO modelo, Pantalla_inicio vista){
         this.modelo=modelo;
-        this.vista=vista;       
+        this.vista=vista;    
+        this.vista.TXT_USUARIO.setText(rb.getString("USUARIO"));
+        this.vista.TXT_CONTRASEÑA.setText(rb.getString("CONTASEÑA"));
+        this.vista.BTN_ACEPTAR.addActionListener(this); 
+        this.vista.BTN_ACEPTAR.setActionCommand("SIGNIN");
+        this.rb = ResourceBundle.getBundle("locales.iniciosesion.locale", this.loc);
+        this.vista.addWindowListener(this);
     }
     
     String Usuario= null;
     String password = null;
-
+    
+    
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() instanceof JButton) {
@@ -105,4 +117,6 @@ public class controladorLogin implements ActionListener, WindowListener {
     public void windowDeactivated(WindowEvent e) {
          //To change body of generated methods, choose Tools | Templates.
     }
+
+   
 }
