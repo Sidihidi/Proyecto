@@ -195,17 +195,7 @@ public class modificacion_de_datos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {        
-                        String sentenciaSQL = "insert into estudiante values(?,?,?,?)";
-                        conect.psPrepararSentencia = BD.conect.prepareStatement(sentenciaSQL);
-                        conectar.psPrepararSentencia.setString(1, jtxtCodAlumnoEstudiante.getText());
-                        conectar.psPrepararSentencia.setString(2, jtxtNombresEstudiante.getText());
-                        conectar.psPrepararSentencia.setString(3, jtxtApellidosEstudiante.getText());
-                        conectar.psPrepararSentencia.setString(4, jtxtEmailEstudiante.getText());
-                        modelo.psPrepararSentencia.executeUpdate();       
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

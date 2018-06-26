@@ -10,13 +10,20 @@ package modelo;
  * @author User
  */
 public class Usuario {
-    private String nom_usu,password,cargo;
 
-    public Usuario(String nom_usu, String password, String cargo){
+    public String nom_usu;
+    public String password;
+    public String cargo;
+
+   
+
+    public Usuario(String nom_usu, String password, String cargo) {
         this.nom_usu=nom_usu;
         this.password=password;
         this.cargo=cargo;
     }
+
+   
     public String getCargo() {
         return cargo;
     }

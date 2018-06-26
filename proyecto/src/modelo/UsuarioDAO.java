@@ -26,25 +26,57 @@ public class UsuarioDAO {
         conn = new BD();
     }
     
-    public ArrayList<String> Inicio(String nom_usu, String password) {
-        ArrayList<String> resultado = new ArrayList<>();
-        Connection con = conn.conexion();
-        ResultSet rs = null;
+    public boolean Inicio(String nom_usu, String password) {
+       
+        boolean valido = false;
+        int existe=0;
 
-        try {
-            PreparedStatement ps = con.prepareStatement("select Nom_usu,Password,cargo from usuario where Nom_usu=? and password=?");
-            ps.setString(1, nom_usu);
-            ps.setString(2, password);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                resultado.add(rs.getString(1));
-                resultado.add(rs.getString(2));
+        if (password == null) {
+            Connection con = conn.conexion();
+            ResultSet rs = null;
+            try {
+                PreparedStatement ps = con.prepareStatement("select Nom_usu,Password,cargo from usuario where Nom_usu=?");
+                ps.setString(1, nom_usu);
+                rs = ps.executeQuery();
+                while(rs.next()) {
+                    existe++;
+                }
+                if (existe == 1) {
+                    valido = true;
+                }
+            } catch (SQLException e) {
+
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } else {
+            Connection con = conn.conexion();
+            ResultSet rs=null;
+            try {
+                PreparedStatement ps = con.prepareStatement("SELECT password FROM usuario WHERE nom_usu = ?");
+                ps.setString(1, nom_usu);
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    if (rs.getString(1).equals(password)) {
+                        valido = true;
+                    } else {
+                        valido = false;
+                    }
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "UsuarioDAO: SQLException", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getClass(), "UsuarioDAO", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "UsuarioDAO: SQLException", JOptionPane.ERROR_MESSAGE);
+                }
+                conn.closeConnection(con);
+            }
         }
 
-        return resultado;
+
+        return valido;
     }
 }
 

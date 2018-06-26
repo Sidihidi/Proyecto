@@ -1,7 +1,7 @@
 package vista;
 import modelo.Usuario;
 public class Pantalla_inicio extends javax.swing.JFrame {
-  Usuario obj = new Usuario();
+  
     public Pantalla_inicio() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -91,38 +91,7 @@ public class Pantalla_inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_TXT_CONTRASEÑAActionPerformed
 
     private void BTN_ACEPTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_ACEPTARActionPerformed
-        String id = this.TXT_USUARIO.getText();
-        String pwd = this.TXT_CONTRASEÑA.getText();
 
-        
-        obj.setNom_usu(id);
-        obj.ingreso();
-        String tipo = obj.getCargo();
-
-        if(id.equals(obj.getNom_usu())){
-           if(pwd.equals(obj.getPassword())){
-        
-        if(tipo.equals("admin")){
-              MenuAdministrador open = new MenuAdministrador();
-              open.show();
-              this.dispose();
-              System.out.println("Administrador");
-        }
-        if(tipo.equals("Usuario")){
-           consultas op = new consultas();
-            op.show();
-            this.dispose();
-            System.out.println("Usuario");
-        }
-        System.out.println(obj.cargo);
-               
-        
-    }
-}
-else{
-    System.out.print("Error");
-}
-     
     }//GEN-LAST:event_BTN_ACEPTARActionPerformed
 
     
@@ -154,10 +123,10 @@ else{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTN_ACEPTAR;
+    public javax.swing.JButton BTN_ACEPTAR;
     private javax.swing.JLabel CONTRASEÑA;
-    private javax.swing.JPasswordField TXT_CONTRASEÑA;
-    private javax.swing.JTextField TXT_USUARIO;
+    public javax.swing.JPasswordField TXT_CONTRASEÑA;
+    public javax.swing.JTextField TXT_USUARIO;
     private javax.swing.JLabel USUARIO;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
